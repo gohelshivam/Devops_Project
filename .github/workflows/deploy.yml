@@ -2,7 +2,7 @@ name: CI/CD Pipeline to AWS
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   # ==========================================
@@ -18,8 +18,8 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
-          cache: 'pip'
+          python-version: "3.12"
+          cache: "pip"
 
       - name: Install Dependencies
         run: |
@@ -27,7 +27,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run Pytest
-        run: pytest -v
+        env:
+          PYTHONPATH: .
+        run: python -m pytest -v
 
   # ==========================================
   # STAGE 2: BUILD & PUSH DOCKER IMAGE
