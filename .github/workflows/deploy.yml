@@ -3,6 +3,7 @@ name: CI/CD Pipeline to AWS
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
 
 jobs:
   # ==========================================
@@ -70,7 +71,7 @@ jobs:
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
+          username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             echo "Pulling latest Docker image..."
